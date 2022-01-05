@@ -47,16 +47,107 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext contextdata) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
-            height: 150,
-            width: 150,
+              margin: EdgeInsets.all(10),
+              height: size.height * 0.22,
+              width: size.width * 0.16,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 6.0)
+                  ]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      height: 80,
+                      width: 80,
+                      child: Image.asset('assets/speedometer.png')),
+                  Text(
+                    'Speed & Fuel',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                  Text(
+                    'Level',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )
+                ],
+              )),
+          Container(
+            margin: EdgeInsets.all(10),
+            height: size.height * 0.22,
+            width: size.width * 0.16,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 6.0),
+                ]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    height: 80,
+                    width: 80,
+                    child: Image.asset('assets/battery.png'))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            height: size.height * 0.22,
+            width: size.width * 0.16,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 6.0)
+                ]),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            height: size.height * 0.22,
+            width: size.width * 0.16,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 6.0)
+                ]),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            height: size.height * 0.22,
+            width: size.width * 0.16,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
