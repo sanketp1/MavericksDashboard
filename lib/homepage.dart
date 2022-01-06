@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mavericks_dashboard/pages/battery_status.dart';
+import 'package:mavericks_dashboard/pages/speed_fuel_page.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,6 +48,9 @@ class _HomePageState extends State<HomePage> {
     else if (args.text == '70') args.text = '';
   }
 
+  List pages = [SppedFuel(), BatteryStatus()];
+  int index = 0;
+
   @override
   Widget build(BuildContext contextdata) {
     Size size = MediaQuery.of(context).size;
@@ -55,7 +60,55 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Container(
+          InkWell(
+            onTap: () {
+              index = 0;
+              setState(() {});
+            },
+            child: Container(
+                margin: EdgeInsets.all(10),
+                height: size.height * 0.22,
+                width: size.width * 0.16,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 1.0),
+                          blurRadius: 6.0)
+                    ]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        height: 80,
+                        width: 80,
+                        child: Image.asset('assets/speedometer.png')),
+                    Text(
+                      'Speed & Fuel',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                    Text(
+                      'Level',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    )
+                  ],
+                )),
+          ),
+          InkWell(
+            onTap: () {
+              index = 1;
+              setState(() {});
+            },
+            child: Container(
               margin: EdgeInsets.all(10),
               height: size.height * 0.22,
               width: size.width * 0.16,
@@ -66,54 +119,24 @@ class _HomePageState extends State<HomePage> {
                     BoxShadow(
                         color: Colors.grey,
                         offset: Offset(0.0, 1.0),
-                        blurRadius: 6.0)
+                        blurRadius: 6.0),
                   ]),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
+                      margin: EdgeInsets.only(left: 20, bottom: 5),
                       height: 80,
                       width: 80,
-                      child: Image.asset('assets/speedometer.png')),
+                      child: Image.asset('assets/battery.png')),
                   Text(
-                    'Speed & Fuel',
+                    'Battery Status',
                     style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        color: Colors.grey, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    'Level',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                  )
                 ],
-              )),
-          Container(
-            margin: EdgeInsets.all(10),
-            height: size.height * 0.22,
-            width: size.width * 0.16,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0.0, 1.0),
-                      blurRadius: 6.0),
-                ]),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    height: 80,
-                    width: 80,
-                    child: Image.asset('assets/battery.png'))
-              ],
+              ),
             ),
           ),
           Container(
@@ -160,124 +183,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: SfRadialGauge(
-            enableLoadingAnimation: true,
-            animationDuration: 2200,
-            axes: <RadialAxis>[
-              RadialAxis(
-                  startAngle: 270,
-                  endAngle: 270,
-                  minimum: 0,
-                  maximum: 80,
-                  interval: 10,
-                  radiusFactor: 0.4,
-                  showAxisLine: false,
-                  showLastLabel: false,
-                  minorTicksPerInterval: 4,
-                  majorTickStyle: MajorTickStyle(
-                      length: 8, thickness: 3, color: Colors.black),
-                  minorTickStyle: MinorTickStyle(
-                      length: 3, thickness: 1.5, color: Colors.black),
-                  axisLabelStyle: GaugeTextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
-                  onLabelCreated: labelCreated),
-              RadialAxis(
-                  pointers: <GaugePointer>[
-                    NeedlePointer(
-                        needleLength: 0.95,
-                        enableAnimation: true,
-                        animationType: AnimationType.ease,
-                        needleStartWidth: 1.5,
-                        needleEndWidth: 6,
-                        needleColor: Colors.red,
-                        knobStyle: KnobStyle(knobRadius: 0.09))
-                  ],
-                  ranges: <GaugeRange>[
-                    GaugeRange(
-                        startValue: 0,
-                        endValue: 200,
-                        sizeUnit: GaugeSizeUnit.factor,
-                        startWidth: 0.03,
-                        endWidth: 0.03,
-                        gradient: SweepGradient(colors: const <Color>[
-                          Colors.green,
-                          Colors.yellow,
-                          Colors.red
-                        ], stops: const <double>[
-                          0.0,
-                          0.5,
-                          1
-                        ]))
-                  ],
-                  minimum: 0,
-                  maximum: 200,
-                  labelOffset: 30,
-                  axisLineStyle: AxisLineStyle(
-                      thicknessUnit: GaugeSizeUnit.factor, thickness: 0.03),
-                  majorTickStyle: MajorTickStyle(
-                      length: 6, thickness: 4, color: Colors.black),
-                  minorTickStyle: MinorTickStyle(
-                      length: 3, thickness: 3, color: Colors.black38),
-                  axisLabelStyle: GaugeTextStyle(
-                      color: Colors.black38,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14))
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 250, height: 250, //height and width of guage
-          child: SfRadialGauge(
-              title: GaugeTitle(text: "Fuel Level"), //title for guage
-              enableLoadingAnimation:
-                  true, //show meter pointer movement while loading
-              animationDuration: 4500, //pointer movement speed
-              axes: <RadialAxis>[
-                //Radial Guage Axix, use other Guage type here
-                RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
-                  //Guage Ranges
-                  GaugeRange(
-                      startValue: 0,
-                      endValue: 50, //start and end point of range
-                      color: Colors.green,
-                      startWidth: 10,
-                      endWidth: 10),
-                  GaugeRange(
-                      startValue: 50,
-                      endValue: 100,
-                      color: Colors.orange,
-                      startWidth: 10,
-                      endWidth: 10),
-                  GaugeRange(
-                      startValue: 100,
-                      endValue: 150,
-                      color: Colors.red,
-                      startWidth: 10,
-                      endWidth: 10)
-                  //add more Guage Range here
-                ], pointers: <GaugePointer>[
-                  NeedlePointer(
-                    value: 120,
-                  ) //add needlePointer here
-                  //set value of pointer to 80, it will point to '80' in guage
-                ], annotations: <GaugeAnnotation>[
-                  GaugeAnnotation(
-                      widget: Container(
-                          child: Text('80.0',
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold))),
-                      angle: 90,
-                      positionFactor: 0.5),
-                  //add more annotations 'texts inside guage' here
-                ])
-              ]),
-        )
-      ]),
+      body:  pages[index],
     );
   }
 }

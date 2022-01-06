@@ -1,0 +1,28 @@
+name: mavericksdashboard
+version: 0.1.0
+summary: for controlling automobile vehicles using raspberrypi 
+description: A solution for making all fundamental utilities of an automobile digital using rapberryPi
+
+confinement: strict
+base: core18
+grade: stable
+
+slots:
+  dbus-mavericks-dashboard-app: # adjust accordingly to your app name
+    interface: dbus
+    bus: session
+    name: org.devfuas.mavericks_dashboard # adjust accordingly to your app name and
+    
+apps:
+  mavericks-dashboard-app:
+    command: mavericks_dashboard
+    extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+    - network
+    slots:
+      - dbus-mavericks-dashboard
+parts:
+  mavericks-dashboard-app:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application
